@@ -9,6 +9,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Linq;
 [assembly: AssemblyTitle("JailPriority Plugin")]
+[assembly: AssemblyVersion("1.0.0.1")]
 
 namespace ACT_Plugin
 {
