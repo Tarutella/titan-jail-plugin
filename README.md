@@ -1,6 +1,7 @@
 # Titan Jail ACT Plugin!
 
 This plugin is used to call out player's position based on a priority list
+https://github.com/Tarutella/titan-jail-plugin/releases
 
 Example:
 > Player1 < Jail\
