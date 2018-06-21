@@ -9,7 +9,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Linq;
 [assembly: AssemblyTitle("JailPriority Plugin")]
-[assembly: AssemblyVersion("1.0.0.1")]
+[assembly: AssemblyVersion("1.0.0.2")]
 
 namespace ACT_Plugin
 {
@@ -485,11 +485,12 @@ namespace ACT_Plugin
                 return;
             if (stopwatch.ElapsedMilliseconds > 1000)//if elapsed time since 1st matchup > 1 second. reset stopwatch
             {
+                logsTextBox.Text += "\r\n\r\n" + "=======[RESET]=======";
                 stopwatch.Reset();
                 countMatches = 0;
                 orderPlayers.Clear();
             }
-            logsTextBox.Text+= "\r\n" + logInfo.logLine;
+            logsTextBox.Text += "\r\n" + logInfo.logLine;
             stopwatch.Start();
             for (int i = 0; i < players.Count; i++)
             {
@@ -498,28 +499,32 @@ namespace ACT_Plugin
             }
             countMatches++;
             int y = 0;
-            if (countMatches == 3)
+            if (countMatches != 3)
+                return;
+            if (countMatches != orderPlayers.Count)
             {
-                for (int i = 0; i < players.Count; i++)
+                logsTextBox.Text += "\r\n" + "-[Incorrect name/s in priority list!]-";
+                return;
+            }
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (orderPlayers.Contains(players[i]))
                 {
-                    if (orderPlayers.Contains(players[i]))
+                    if (players[i] == players[yourIndex])
                     {
-                        if (players[i] == players[yourIndex])
-                        {
-                            ActGlobals.oFormActMain.TTS(order[y]);
-                            logsTextBox.Text += "\r\n" + "---------------------Matched! TTS > " + order[y]+"-------------";
-                            break;
-                        }
-                        y++;
+                        ActGlobals.oFormActMain.TTS(order[y]);
+                        logsTextBox.Text += "\r\n" + "---[" + (i + 1) + "]---[" + players[i] + "]------>-----" + order[y] + "---<--[YOU]";
                     }
+                    else
+                    {
+                        logsTextBox.Text += "\r\n" + "---[" + (i + 1) + "]---[" + players[i] + "]------>-----" + order[y] + "-------------";
+                    }
+                    y++;
                 }
-                stopwatch.Reset();
-                orderPlayers.Clear();
-                countMatches = 0;
             }
         }
-
-        public void DeInitPlugin()
+        
+    public void DeInitPlugin()
         {
             // Unsubscribe from any events you listen to when exiting!
             ActGlobals.oFormActMain.OnLogLineRead -= OFormActMain_OnLogLineRead;
@@ -555,14 +560,12 @@ namespace ACT_Plugin
                             {
                                 String line = xReader.ReadElementContentAsString();
                                 Players[i].Text = line;
-                                players.Add(line);
                                 i++;
                             }
                             if (xReader.Name == "Order")
                             {
                                 String line = xReader.ReadElementContentAsString();
                                 Order[j].Text = line;
-                                order.Add(line);
                                 j++;
                             }
                         }
@@ -644,7 +647,7 @@ namespace ACT_Plugin
                         xWriter.Close();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     lblStatus.Text = "Error Exporting File: " + ex.Message;
                 }
@@ -685,7 +688,7 @@ namespace ACT_Plugin
                     {
                         lblStatus.Text = "Error Importing File: " + ex.Message;
                     }
-                    
+
                 }
             }
         }
