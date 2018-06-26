@@ -9,7 +9,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Linq;
 [assembly: AssemblyTitle("JailPriority Plugin")]
-[assembly: AssemblyVersion("1.0.0.2")]
+[assembly: AssemblyVersion("1.0.0.3")]
 
 namespace ACT_Plugin
 {
@@ -559,12 +559,14 @@ namespace ACT_Plugin
                             if (xReader.Name == "Player")
                             {
                                 String line = xReader.ReadElementContentAsString();
+                                players.Add(line);
                                 Players[i].Text = line;
                                 i++;
                             }
                             if (xReader.Name == "Order")
                             {
                                 String line = xReader.ReadElementContentAsString();
+                                order.Add(line);
                                 Order[j].Text = line;
                                 j++;
                             }
