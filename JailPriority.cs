@@ -474,7 +474,7 @@ namespace ACT_Plugin
         List<String> orderPlayers = new List<string>();// list of players matched in logLine
         List<String> order = new List<String>(); // List of TTS Callouts
         List<String> players = new List<String>(); // All players in priority list
-        String regex = ":[a-zA-Z-']+?:2B6(B|C):.*?:.*?:"; // regex for jails
+        String regex = ":(.*)?:2B6(B|C):.*?:.*?:"; // regex for jails
         int countMatches = 0;// number of matchups to the regex
         int yourIndex = 0;// player's index in the priority list
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
