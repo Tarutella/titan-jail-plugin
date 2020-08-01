@@ -9,7 +9,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Linq;
 [assembly: AssemblyTitle("JailPriority Plugin")]
-[assembly: AssemblyVersion("1.0.0.3")]
+[assembly: AssemblyVersion("1.0.0.5")]
 
 namespace ACT_Plugin
 {
@@ -466,6 +466,16 @@ namespace ACT_Plugin
             lblStatus = pluginStatusText;   // Hand the status label's reference to our local var
             pluginScreenSpace.Controls.Add(this);   // Add this UserControl to the tab ACT provides
             this.Dock = DockStyle.Fill; // Expand the UserControl to fill the tab's client space
+
+            //  If our dll isn't the default name, change the config file name to match so that we can have multiple instances of the plugin that don't share configuration (i.e., if you're running multiple groups at once).  Leave the default alone so as not to mess up existing installations.
+            foreach( var plugin in ActGlobals.oFormActMain.ActPlugins )
+            {
+                if( plugin.pluginObj == this && plugin.pluginFile.Name != "Jail_Plugin.dll" )
+                {
+                    settingsFile = Path.Combine( ActGlobals.oFormActMain.AppDataFolder.FullName, $"Config\\{Path.GetFileNameWithoutExtension( plugin.pluginFile.Name )}.config.xml" );
+                }
+			}
+
             xmlSettings = new SettingsSerializer(this); // Create a new settings serializer and pass it this instance
             LoadSettings();
             ActGlobals.oFormActMain.OnLogLineRead += OFormActMain_OnLogLineRead;
@@ -524,7 +534,7 @@ namespace ACT_Plugin
             }
         }
         
-    public void DeInitPlugin()
+        public void DeInitPlugin()
         {
             // Unsubscribe from any events you listen to when exiting!
             ActGlobals.oFormActMain.OnLogLineRead -= OFormActMain_OnLogLineRead;
