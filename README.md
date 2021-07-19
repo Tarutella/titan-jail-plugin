@@ -33,7 +33,8 @@ It will only call out if there are 3 log lines that match the regular expression
 of getting a Titan Gaol, within 1 second.
 
 ## How to test it:
-Put these lines in a macro and run the macro. 
+Put these lines in a macro and change the names below to members within the priority list. 
+then run the macro. 
 
 `/e 15:4000596E:Garuda:2B6C:Rock Throw:106D93DF:A'oshane Taru`\
 `/e 15:4000596F:Garuda:2B6C:Rock Throw:1070B706:Akela Freya`\
