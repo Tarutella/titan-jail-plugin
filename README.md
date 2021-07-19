@@ -17,7 +17,7 @@ Example:
 the plugin will let you know that your position is second on the priority list.
 
 ## Steps:
-1- Fill in priority list and select your character:\
+1- Fill in priority list and select your character(make sure to fill the whole list, or it wouldn't work) :\
 ![](https://i.gyazo.com/a4b45440d9638561bdc05ecca46d2a26.png)
 
 2- Set up your Triggers:\
