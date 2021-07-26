@@ -45,8 +45,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files\Advanced Combat Tracker\Advanced Combat Tracker.exe</StartProgram>
-    <StartWorkingDirectory>C:\Program Files\Advanced Combat Tracker\</StartWorkingDirectory>
+    <StartProgram>$(programfiles)\Advanced Combat Tracker\Advanced Combat Tracker.exe</StartProgram>
+    <StartWorkingDirectory>$(programfiles)\Advanced Combat Tracker\</StartWorkingDirectory>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -68,7 +68,7 @@
   -->
   <ItemGroup>
     <Reference Include="Advanced Combat Tracker">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Advanced Combat Tracker\Advanced Combat Tracker.exe</HintPath>
+      <HintPath>$(programfiles)\Advanced Combat Tracker\Advanced Combat Tracker.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
